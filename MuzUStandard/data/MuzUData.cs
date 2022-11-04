@@ -1,47 +1,84 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Xml.Linq;
 
-namespace MuzU.data
+namespace MuzUStandard.data
 {
     public class MuzUData: XmlBase
     {
         public MuzUData() { }
         public MuzUData(XElement xElement) : base(xElement) { }
 
-        public string Name { get; set; } = "NoName";
-        public string MusicDescription { get; set; }
-        public string MusicPath { get; set; }
-        public long MusicAllign_μs { get; set; } = 0;
-        public long? MicrosecondsPerQuarterNote { get; set; } = null;
-        public string TimeSignature { get; set; } = null;
-        public List<TimingSequence> TimingSequences { get; set; } = new List<TimingSequence>();
+        public Identity Identity;
+        public Music Music;
+        public MusicLocal MusicLocal;
+        public Tempo Tempo;
+        public SequenceList SequenceList;
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement("MuzU",
-                            new XElement(nameof(Name), Name),
-                            new XElement(nameof(MusicDescription), MusicDescription),
-                            new XElement(nameof(MusicPath), MusicPath),
-                            new XElement(nameof(MusicAllign_μs), MusicAllign_μs),
-                            new XElement(nameof(MicrosecondsPerQuarterNote), MicrosecondsPerQuarterNote),
-                            new XElement(nameof(TimeSignature), TimeSignature),
-                            XmlConverter.ListToElement(TimingSequences));
+            ThisElement = new XElement(GetType().Name,
+                            Identity.ToXElement(),
+                            Music.ToXElement(),
+                            MusicLocal.ToXElement(),
+                            Tempo.ToXElement(),
+                            SequenceList.ToXElement());
             return ThisElement;
         }
 
         internal override void LoadFromXElement(XElement xElement)
         {
             ThisElement = xElement;
-            Name = ThisElement.Element(nameof(Name)).Value;
-            MusicDescription = ThisElement.Element(nameof(MusicDescription))?.Value;
-            MusicPath = ThisElement.Element(nameof(MusicPath))?.Value;
-            MusicAllign_μs = long.Parse(ThisElement.Element(nameof(MusicAllign_μs))?.Value??"0");
-            if (!long.TryParse(ThisElement.Element(nameof(MicrosecondsPerQuarterNote))?.Value, out long _mpq))
-                MicrosecondsPerQuarterNote = null;
-            else MicrosecondsPerQuarterNote = _mpq;
-            TimeSignature = ThisElement.Element(nameof(TimeSignature))?.Value;
-            TimingSequences = XmlConverter.ElementToList<TimingSequence>(ThisElement);
+            Identity = new Identity(xElement);
+            Music = new Music(xElement);
+            MusicLocal = new MusicLocal(xElement);
+            Tempo = new Tempo(xElement);
+            SequenceList = new SequenceList(xElement);
             base.LoadFromXElement(ThisElement);
+        }
+    }
+
+    public class Identity : XmlInfo
+    {
+        public Identity() : base() { }
+        public Identity(XElement xElement) : base(xElement) { }
+
+        public string Name { get => Infos[nameof(Name)]; set => Infos[nameof(Name)] = value; }
+        public string Creator { get => Infos[nameof(Creator)]; set => Infos[nameof(Creator)] = value; }
+        public string CommentFromCreator { get => Infos[nameof(CommentFromCreator)]; set => Infos[nameof(CommentFromCreator)] = value; }
+    }
+
+    public class Music : XmlInfo
+    {
+        public Music() : base() { }
+        public Music(XElement xElement) : base(xElement) { }
+
+        public string Name { get => Infos[nameof(Name)]; set => Infos[nameof(Name)] = value; }
+        public string Author { get => Infos[nameof(Author)]; set => Infos[nameof(Author)] = value; }
+        public string MusicVersion { get => Infos[nameof(MusicVersion)]; set => Infos[nameof(MusicVersion)] = value; }
+    }
+
+    public class MusicLocal : XmlBase
+    {
+        public MusicLocal() { }
+        public MusicLocal(XElement xElement): base(xElement) {}
+
+        public string MusicPath;
+        public long MusicOffsetMicroseconds; // if positive audio has excess part, vice versa
+        
+        internal override XElement ToXElement()
+        {
+            ThisElement = new XElement(GetType().Name,
+                            new XElement(nameof(MusicPath), MusicPath),
+                            new XElement(nameof(MusicOffsetMicroseconds), MusicOffsetMicroseconds));
+            return base.ToXElement();
+        }
+
+        internal override void LoadFromXElement(XElement xElement)
+        {
+            base.LoadFromXElement(xElement);
+            MusicPath = ThisElement.Element(nameof(MusicPath)).Value;
+            MusicOffsetMicroseconds = long.Parse(ThisElement.Element(nameof(MusicOffsetMicroseconds))?.Value ?? "0");
         }
     }
 }

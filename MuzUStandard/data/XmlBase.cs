@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace MuzU.data
+namespace MuzUStandard.data
 {
     public abstract class XmlBase
     {

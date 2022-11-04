@@ -1,9 +1,8 @@
-﻿using System.IO;
+﻿using MuzUStandard.data;
+using System.IO;
 using System.Xml.Linq;
-using MuzU.data;
-using MuzU.util;
 
-namespace MuzU
+namespace MuzUStandard
 {
     public class MuzUProject
     {

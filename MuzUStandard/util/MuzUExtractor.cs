@@ -1,15 +1,15 @@
-﻿using MuzU.data;
+﻿using MuzUStandard.data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MuzU.util
+namespace MuzUStandard.util
 {
     public class MuzUExtractor
     {
         private static double µs = 1000000.0;
 
-        public static List<KeyValuePair<double, double>> Extract(TimingSequence sequence, int propertyIndex, double startSec, double endSec)
+        public static List<KeyValuePair<double, double>> Extract(Sequence sequence, int propertyIndex, double startSec, double endSec)
         {
             long startμs = (long)(startSec * µs);
             long endμs = (long)(endSec * µs);
@@ -26,7 +26,7 @@ namespace MuzU.util
             return result;
         }
 
-        public static List<KeyValuePair<double, string>> ExtractWords(TimingSequence sequence, double startSec, double endSec)
+        public static List<KeyValuePair<double, string>> ExtractWords(Sequence sequence, double startSec, double endSec)
         {
             List<double> times = sequence.TimingItems.Select(it => it.Time / µs).ToList();
             Regex regex = new Regex("[,.!?\"\\|/]");
@@ -53,7 +53,7 @@ namespace MuzU.util
             return result;
         }
 
-        public static List<KeyValuePair<double, string>> ExtractSyllables(TimingSequence sequence, double startSec, double endSec)
+        public static List<KeyValuePair<double, string>> ExtractSyllables(Sequence sequence, double startSec, double endSec)
         {
             List<double> times = sequence.TimingItems.Select(it => it.Time / µs).ToList();
             Regex regex = new Regex("[,.!?\"\\|/]");

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MuzU.util
+namespace MuzUStandard.util
 {
     public class MuzUConverter
     {

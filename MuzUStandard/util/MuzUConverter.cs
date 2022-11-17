@@ -2,7 +2,7 @@
 
 namespace MuzUStandard.util
 {
-    public class MuzUConverter
+    internal class MuzUConverter
     {
         internal static int GetTimeSignatureNumerator(String str)
         {
@@ -16,7 +16,7 @@ namespace MuzUStandard.util
             return r;
         }
 
-        public static double GetBPM(long microsecondsPerQuarterNote, string timeSignature)
+        internal static double GetBPM(long microsecondsPerQuarterNote, string timeSignature)
         {
             int n = GetTimeSignatureNumerator(timeSignature);
             int d = GetTimeSignatureDenominator(timeSignature);
@@ -25,7 +25,7 @@ namespace MuzUStandard.util
             return 1.0 / minutesePerBeat;
         }
 
-        public static long GetMicrosecondsPerQuarterNote(double bPM, string timeSignature)
+        internal static long GetMicrosecondsPerQuarterNote(double bPM, string timeSignature)
         { 
             int n = GetTimeSignatureNumerator(timeSignature);
             int d = GetTimeSignatureDenominator(timeSignature);

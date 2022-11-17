@@ -3,15 +3,15 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    public class Node : XmlBase
+    internal class Node : XmlBase
     {
         public Node() { }
-        public Node(XElement xElement):base(xElement) { }
+        internal Node(XElement xElement):base(xElement) { }
 
-        public double Time { get; set; } = 0;
-        public double? Length { get; set; }
-        public int? Note{ get; set; }
-        public string Lyrics { get; set; }
+        internal double Time { get; set; } = 0;
+        internal double? Length { get; set; }
+        internal int? Note{ get; set; }
+        internal string Lyrics { get; set; }
 
         internal override XElement ToXElement()
         {

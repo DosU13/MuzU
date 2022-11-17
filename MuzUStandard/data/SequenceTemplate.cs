@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    public enum TimeUnite { Microsecond, WholeNote, QuarterNote}
+    internal enum TimeUnite { Microsecond, WholeNote, QuarterNote}
 
     static class Extensions
     {
@@ -16,16 +16,16 @@ namespace MuzUStandard.data
         }
     }
 
-    public class SequenceTemplate : XmlBase
+    internal class SequenceTemplate : XmlBase
     {
-        public SequenceTemplate() { }
-        public SequenceTemplate(XElement xElement) : base(xElement) { }
+        internal SequenceTemplate() { }
+        internal SequenceTemplate(XElement xElement) : base(xElement) { }
 
-        public bool LengthEnabled { get; set; } = false;
-        public bool NoteEnabled { get; set; } = false;
-        public bool LyricsEnabled { get; set; } = false;
-        public TimeUnite TimeUnit { get; set; } = TimeUnite.QuarterNote;
-        public PropertiesList PropertiesList { get; set; } = new PropertiesList();
+        internal bool LengthEnabled { get; set; } = false;
+        internal bool NoteEnabled { get; set; } = false;
+        internal bool LyricsEnabled { get; set; } = false;
+        internal TimeUnite TimeUnit { get; set; } = TimeUnite.QuarterNote;
+        internal PropertiesList PropertiesList { get; set; } = new PropertiesList();
 
         internal override XElement ToXElement()
         {
@@ -50,10 +50,10 @@ namespace MuzUStandard.data
         }
     }
 
-    public class PropertiesList : XmlList<Property>
+    internal class PropertiesList : XmlList<Property>
     {
-        public PropertiesList() { }
-        public PropertiesList(XElement xElement) : base(xElement) { }
+        internal PropertiesList() { }
+        internal PropertiesList(XElement xElement) : base(xElement) { }
 
         internal override XElement ToXElement()
         {
@@ -68,17 +68,17 @@ namespace MuzUStandard.data
         }
     }
 
-    public class Property : XmlBase
+    internal class Property : XmlBase
     {
         public Property() { }
-        public Property(string name) 
+        internal Property(string name) 
         {
             Name = name;
         }
 
-        public Property(XElement xElement) : base(xElement) { }
+        internal Property(XElement xElement) : base(xElement) { }
 
-        public string Name { get; set; } = "NoName";
+        internal string Name { get; set; } = "NoName";
 
         internal override XElement ToXElement()
         {
@@ -95,21 +95,21 @@ namespace MuzUStandard.data
         }
     }
 
-    //public static class Extensions
+    //internal static class Extensions
     //{
-    //    public static string _ToString(this ValueType type)
+    //    internal static string _ToString(this ValueType type)
     //    {
     //        if (type == ValueType.Integer) return "Integer";
     //        else if (type == ValueType.Decimal) return "Decimal";
     //        else return "NoWay this is impossible";
     //    }
 
-    //    public static ValueType ParseToValueType(this String type)
+    //    internal static ValueType ParseToValueType(this String type)
     //    {
     //        if (type == "Integer") return ValueType.Integer;
     //        else return ValueType.Decimal;
     //    }
     //}
 
-    //public enum ValueType { Integer, Decimal } //TinyText}
+    //internal enum ValueType { Integer, Decimal } //TinyText}
 }

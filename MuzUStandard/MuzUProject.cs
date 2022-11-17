@@ -6,8 +6,8 @@ namespace MuzUStandard
 {
     public class MuzUProject
     {
-        public string Name { get; set; }
-        public MuzUData data;
+        internal string Name { get; set; }
+        internal MuzUData data;
 
         public MuzUProject() => data = new MuzUData();
 
@@ -30,8 +30,5 @@ namespace MuzUStandard
             doc.Declaration = new XDeclaration("1.0", "utf-8", "true");
             return doc;
         }
-
-        public double BPM => MuzUConverter.GetBPM(data.MicrosecondsPerQuarterNote.Value, data.TimeSignature);
-        public int BeatsPerBar => MuzUConverter.GetTimeSignatureNumerator(data.TimeSignature);
     }
 }

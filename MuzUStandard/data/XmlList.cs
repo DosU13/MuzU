@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    public abstract class XmlList<T> : XmlBase where T : XmlBase, new()
+    internal abstract class XmlList<T> : XmlBase where T : XmlBase, new()
     {
         internal XmlList() {}
         

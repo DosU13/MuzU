@@ -2,10 +2,10 @@
 
 namespace MuzUStandard.data
 {
-    public class SequenceList : XmlList<Sequence>
+    internal class SequenceList : XmlList<Sequence>
     {
-        public SequenceList() { }
-        public SequenceList(XElement xElement) : base(xElement) { }
+        internal SequenceList() { }
+        internal SequenceList(XElement xElement) : base(xElement) { }
 
         internal override XElement ToXElement()
         {

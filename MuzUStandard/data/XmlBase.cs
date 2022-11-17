@@ -2,7 +2,7 @@
 
 namespace MuzUStandard.data
 {
-    public abstract class XmlBase
+    internal abstract class XmlBase
     {
         protected XElement ThisElement = new XElement("empty_xmlbase");
 

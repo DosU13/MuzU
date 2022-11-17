@@ -5,13 +5,13 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    public class Tempo : XmlBase
+    internal class Tempo : XmlBase
     {
-        public Tempo() { }
-        public Tempo(XElement xElement) : base(xElement) { }
+        internal Tempo() { }
+        internal Tempo(XElement xElement) : base(xElement) { }
 
-        public long MicrosecondsPerQuarterNote;
-        public TimeSignature TimeSignature; 
+        internal long MicrosecondsPerQuarterNote;
+        internal TimeSignature TimeSignature; 
 
         internal override XElement ToXElement()
         {
@@ -29,13 +29,13 @@ namespace MuzUStandard.data
         }
     }
 
-    public class TimeSignature : XmlBase
+    internal class TimeSignature : XmlBase
     {
-        public TimeSignature() { }
-        public TimeSignature(XElement xElement) : base(xElement) { }
+        internal TimeSignature() { }
+        internal TimeSignature(XElement xElement) : base(xElement) { }
 
-        public long Numerator;
-        public long Denominator;
+        internal long Numerator;
+        internal long Denominator;
 
         internal override XElement ToXElement()
         {

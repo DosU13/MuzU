@@ -2,14 +2,14 @@
 
 namespace MuzUStandard.data
 {
-    public class Sequence : XmlBase
+    internal class Sequence : XmlBase
     {
         public Sequence(){}
-        public Sequence(XElement xElement) : base(xElement) { }
+        internal Sequence(XElement xElement) : base(xElement) { }
 
-        public string Name;
-        public SequenceTemplate SequenceTemplate { get; set; } = new SequenceTemplate();
-        public NodeList NodeList { get; set; } = new NodeList();
+        internal string Name;
+        internal SequenceTemplate SequenceTemplate { get; set; } = new SequenceTemplate();
+        internal NodeList NodeList { get; set; } = new NodeList();
 
         internal override XElement ToXElement()
         {

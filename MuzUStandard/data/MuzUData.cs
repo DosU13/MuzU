@@ -4,16 +4,16 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    public class MuzUData: XmlBase
+    internal class MuzUData: XmlBase
     {
-        public MuzUData() { }
-        public MuzUData(XElement xElement) : base(xElement) { }
+        internal MuzUData() { }
+        internal MuzUData(XElement xElement) : base(xElement) { }
 
-        public Identity Identity;
-        public Music Music;
-        public MusicLocal MusicLocal;
-        public Tempo Tempo;
-        public SequenceList SequenceList;
+        internal Identity Identity;
+        internal Music Music;
+        internal MusicLocal MusicLocal;
+        internal Tempo Tempo;
+        internal SequenceList SequenceList;
 
         internal override XElement ToXElement()
         {
@@ -38,33 +38,33 @@ namespace MuzUStandard.data
         }
     }
 
-    public class Identity : XmlInfo
+    internal class Identity : XmlInfo
     {
-        public Identity() : base() { }
-        public Identity(XElement xElement) : base(xElement) { }
+        internal Identity() : base() { }
+        internal Identity(XElement xElement) : base(xElement) { }
 
-        public string Name { get => Infos[nameof(Name)]; set => Infos[nameof(Name)] = value; }
-        public string Creator { get => Infos[nameof(Creator)]; set => Infos[nameof(Creator)] = value; }
-        public string CommentFromCreator { get => Infos[nameof(CommentFromCreator)]; set => Infos[nameof(CommentFromCreator)] = value; }
+        internal string Name { get => Infos[nameof(Name)]; set => Infos[nameof(Name)] = value; }
+        internal string Creator { get => Infos[nameof(Creator)]; set => Infos[nameof(Creator)] = value; }
+        internal string CommentFromCreator { get => Infos[nameof(CommentFromCreator)]; set => Infos[nameof(CommentFromCreator)] = value; }
     }
 
-    public class Music : XmlInfo
+    internal class Music : XmlInfo
     {
-        public Music() : base() { }
-        public Music(XElement xElement) : base(xElement) { }
+        internal Music() : base() { }
+        internal Music(XElement xElement) : base(xElement) { }
 
-        public string Name { get => Infos[nameof(Name)]; set => Infos[nameof(Name)] = value; }
-        public string Author { get => Infos[nameof(Author)]; set => Infos[nameof(Author)] = value; }
-        public string MusicVersion { get => Infos[nameof(MusicVersion)]; set => Infos[nameof(MusicVersion)] = value; }
+        internal string Name { get => Infos[nameof(Name)]; set => Infos[nameof(Name)] = value; }
+        internal string Author { get => Infos[nameof(Author)]; set => Infos[nameof(Author)] = value; }
+        internal string MusicVersion { get => Infos[nameof(MusicVersion)]; set => Infos[nameof(MusicVersion)] = value; }
     }
 
-    public class MusicLocal : XmlBase
+    internal class MusicLocal : XmlBase
     {
-        public MusicLocal() { }
-        public MusicLocal(XElement xElement): base(xElement) {}
+        internal MusicLocal() { }
+        internal MusicLocal(XElement xElement): base(xElement) {}
 
-        public string MusicPath;
-        public long MusicOffsetMicroseconds; // if positive audio has excess part, vice versa
+        internal string MusicPath;
+        internal long MusicOffsetMicroseconds; // if positive audio has excess part
         
         internal override XElement ToXElement()
         {

@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    public abstract class XmlInfo: XmlBase
+    internal abstract class XmlInfo: XmlBase
     {
         internal XmlInfo() { Infos = new Dictionary<string, string>(); }
 
@@ -14,7 +14,7 @@ namespace MuzUStandard.data
 
         internal XmlInfo(XElement xElement) : base(xElement) { }
 
-        public readonly Dictionary<string, string> Infos;
+        internal readonly Dictionary<string, string> Infos;
         
         internal override XElement ToXElement()
         {

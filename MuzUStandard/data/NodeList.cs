@@ -2,10 +2,10 @@
 
 namespace MuzUStandard.data
 {
-    public class NodeList : XmlList<Node>
+    internal class NodeList : XmlList<Node>
     {
-        public NodeList() { }
-        public NodeList(XElement xElement) : base(xElement) { }
+        internal NodeList() { }
+        internal NodeList(XElement xElement) : base(xElement) { }
 
         internal override XElement ToXElement()
         {

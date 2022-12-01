@@ -3,34 +3,34 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    internal class Node : XmlBase
+    public class Node : XmlBase
     {
         public Node() { }
         internal Node(XElement xElement):base(xElement) { }
 
-        internal double Time { get; set; } = 0;
-        internal double? Length { get; set; }
-        internal int? Note{ get; set; }
-        internal string Lyrics { get; set; }
+        public NoteTimeSpan Time { get; set; }
+        public NoteTimeSpan Length { get; set; }
+        public int? Note{ get; set; }
+        public string Lyrics { get; set; }
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(GetType().Name,
-                            new XElement(nameof(Time), Time));
-            if (Length != null) ThisElement.Add(new XElement(nameof(Length), Length));
-            if (Note != null) ThisElement.Add(new XElement(nameof(Note), Note));
-            if (Lyrics != null) ThisElement.Add(new XElement(nameof(Lyrics), Lyrics));
-            return base.ToXElement();
+            var xElement = base.ToXElement();
+            xElement.Add(Time.ToXElement());
+            if (Length != null) xElement.Add(Length.ToXElement());
+            if (Note != null) xElement.Add(new XElement(nameof(Note), Note));
+            if (Lyrics != null) xElement.Add(new XElement(nameof(Lyrics), Lyrics));
+            return xElement;
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            ThisElement = xElement.Element(GetType().Name);
-            Time = double.Parse(ThisElement.Element(nameof(Time)).Value);
-            Length = double.TryParse(ThisElement.Element(nameof(Length))?.Value, out double _len) ? _len as double?: null;
-            Note = int.TryParse(ThisElement.Element(nameof(Note))?.Value, out int _note) ? _note as int? : null;
-            Lyrics = ThisElement.Element(nameof(Lyrics))?.Value;
-            base.LoadFromXElement(ThisElement);
+            var thisElement = base.LoadFromXElement(xElement);
+            Time = new NoteTimeSpan(nameof(Time), thisElement);
+            Length = new NoteTimeSpan(nameof(Length), thisElement);
+            Note = int.TryParse(thisElement.Element(nameof(Note))?.Value, out int _note) ? _note as int? : null;
+            Lyrics = thisElement.Element(nameof(Lyrics))?.Value;
+            return thisElement;
         }
     }
 }

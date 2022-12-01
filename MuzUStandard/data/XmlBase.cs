@@ -2,14 +2,16 @@
 
 namespace MuzUStandard.data
 {
-    internal abstract class XmlBase
+    public abstract class XmlBase
     {
-        protected XElement ThisElement = new XElement("empty_xmlbase");
-
         internal XmlBase() { }
         internal XmlBase(XElement xElement) { LoadFromXElement(xElement); }
 
-        internal virtual XElement ToXElement() { return ThisElement; }
-        internal virtual void LoadFromXElement(XElement xElement) { }
+        internal virtual XElement ToXElement() { 
+            return new XElement(GetType().Name);
+        }
+        internal virtual XElement LoadFromXElement(XElement xElement) {
+            return xElement.Element(GetType().Name);
+        }
     }
 }

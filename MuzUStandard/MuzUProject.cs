@@ -5,17 +5,22 @@ using System.Xml.Linq;
 namespace MuzUStandard
 {
     public class MuzUProject
-    {
-        internal string Name { get; set; }
-        internal MuzUData data;
+    {        
+        public MuzUData MuzUData;
+        public MuzUProject() => MuzUData = new MuzUData();
 
-        public MuzUProject() => data = new MuzUData();
-
-        public MuzUProject(Stream stream) => data = LoadFromStream(stream);
+        public MuzUProject(Stream stream) => MuzUData = LoadFromStream(stream);
+        public MuzUProject(TextReader txtReader) => MuzUData = LoadFromStream(txtReader);
 
         private MuzUData LoadFromStream(Stream stream) 
         {
-            return new MuzUData(XDocument.Load(stream).Root);
+            var x = XDocument.Load(stream);
+            return new MuzUData(x.Root);
+        }
+        private MuzUData LoadFromStream(TextReader txtReader)
+        {
+            var x = XDocument.Load(txtReader);
+            return new MuzUData(x.Root);
         }
 
         public void Save(Stream stream)
@@ -26,7 +31,7 @@ namespace MuzUStandard
 
         private XDocument ToXDocument()
         {
-            XDocument doc = new XDocument(data.ToXElement());
+            XDocument doc = new XDocument(MuzUData.ToXElement());
             doc.Declaration = new XDeclaration("1.0", "utf-8", "true");
             return doc;
         }

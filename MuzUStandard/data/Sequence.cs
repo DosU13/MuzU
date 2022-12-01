@@ -2,31 +2,31 @@
 
 namespace MuzUStandard.data
 {
-    internal class Sequence : XmlBase
+    public class Sequence : XmlBase
     {
         public Sequence(){}
         internal Sequence(XElement xElement) : base(xElement) { }
 
-        internal string Name;
-        internal SequenceTemplate SequenceTemplate { get; set; } = new SequenceTemplate();
-        internal NodeList NodeList { get; set; } = new NodeList();
+        public string Name { get; set; } = "";
+        public SequenceTemplate SequenceTemplate { get; set; } = new SequenceTemplate();
+        public NodeList NodeList { get; set; } = new NodeList();
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(nameof(Sequence),
-                            new XElement(nameof(Name), Name),
-                            SequenceTemplate.ToXElement(),
-                            NodeList.ToXElement());
-            return base.ToXElement();
+            var xElement = base.ToXElement();
+            xElement.Add(new XElement(nameof(Name), Name),
+                         SequenceTemplate.ToXElement(),
+                         NodeList.ToXElement());
+            return xElement;
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            ThisElement = xElement.Element(nameof(Sequence));
-            Name = ThisElement.Element(nameof(Name)).Value;
-            SequenceTemplate = new SequenceTemplate(ThisElement);
-            NodeList = new NodeList(ThisElement);
-            base.LoadFromXElement(ThisElement);
+            var thisElement = base.LoadFromXElement(xElement);
+            Name = thisElement.Element(nameof(Name)).Value;
+            SequenceTemplate = new SequenceTemplate(thisElement);
+            NodeList = new NodeList(thisElement);
+            return thisElement;
         }
     }
 }

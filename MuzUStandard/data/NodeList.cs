@@ -2,21 +2,19 @@
 
 namespace MuzUStandard.data
 {
-    internal class NodeList : XmlList<Node>
+    public class NodeList : XmlList<Node>
     {
         internal NodeList() { }
         internal NodeList(XElement xElement) : base(xElement) { }
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(GetType().Name);
             return base.ToXElement();
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            ThisElement = xElement.Element(GetType().Name);
-            base.LoadFromXElement(ThisElement);
+            return base.LoadFromXElement(xElement);
         }
     }
 }

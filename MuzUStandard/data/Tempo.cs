@@ -1,55 +1,65 @@
-﻿using System;
+﻿using MuzUStandard.data.util;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    internal class Tempo : XmlBase
+    public class Tempo : XmlBase
     {
-        internal Tempo() { }
+        internal Tempo() {
+            MicrosecondsPerQuarterNote = 500_000;
+            TimeSignature = new TimeSignature();
+        }
         internal Tempo(XElement xElement) : base(xElement) { }
 
-        internal long MicrosecondsPerQuarterNote;
-        internal TimeSignature TimeSignature; 
+        public long MicrosecondsPerQuarterNote;
+        public TimeSignature TimeSignature;
+        public double BPM {
+            get => Utils.GetBPM(MicrosecondsPerQuarterNote, TimeSignature);
+            set => MicrosecondsPerQuarterNote = Utils.GetMicrosecondsPerQuarterNote(value, TimeSignature);
+        }
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(GetType().Name,
-                            new XElement(nameof(MicrosecondsPerQuarterNote), MicrosecondsPerQuarterNote),
+            var xElement = base.ToXElement();
+            xElement.Add(new XElement(nameof(MicrosecondsPerQuarterNote), MicrosecondsPerQuarterNote),
                             TimeSignature.ToXElement());
-            return base.ToXElement();
+            return xElement;
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            base.LoadFromXElement(xElement);
-            MicrosecondsPerQuarterNote = long.Parse(ThisElement.Element(nameof(MicrosecondsPerQuarterNote))?.Value ?? "0");
-            TimeSignature = new TimeSignature(xElement);
+            var thisElement = base.LoadFromXElement(xElement);
+            MicrosecondsPerQuarterNote = long.Parse(thisElement.Element(nameof(MicrosecondsPerQuarterNote))?.Value ?? "0");
+            TimeSignature = new TimeSignature(thisElement);
+            return thisElement;
         }
     }
 
-    internal class TimeSignature : XmlBase
+    public class TimeSignature : XmlBase
     {
         internal TimeSignature() { }
         internal TimeSignature(XElement xElement) : base(xElement) { }
 
-        internal long Numerator;
-        internal long Denominator;
+        public int Numerator = 4;
+        public int Denominator = 4;
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(GetType().Name,
-                            new XElement(nameof(Numerator), Numerator),
-                            new XElement(nameof(Denominator), Denominator));
-            return base.ToXElement();
+            var xElement = base.ToXElement();
+            xElement.Add(new XElement(nameof(Numerator), Numerator),
+                         new XElement(nameof(Denominator), Denominator));
+            return xElement;
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            base.LoadFromXElement(xElement);
-            Numerator = long.Parse(ThisElement.Element(nameof(Numerator))?.Value ?? "0");
-            Denominator = long.Parse(ThisElement.Element(nameof(Denominator))?.Value ?? "0");
+            var thisElement = base.LoadFromXElement(xElement);
+            Numerator = int.Parse(thisElement.Element(nameof(Numerator))?.Value ?? "0");
+            Denominator = int.Parse(thisElement.Element(nameof(Denominator))?.Value ?? "0");
+            return thisElement;
         }
     }
 }

@@ -4,94 +4,92 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    internal enum TimeUnite { Microsecond, WholeNote, QuarterNote}
+    public enum TimeUnite { Microsecond, Musical, Both}
 
     static class Extensions
     {
         internal static TimeUnite ParseToTimeUnit(string str)
         {
             if (str == TimeUnite.Microsecond.ToString()) return TimeUnite.Microsecond;
-            else if (str == TimeUnite.WholeNote.ToString()) return TimeUnite.WholeNote;
-            else return TimeUnite.QuarterNote;
+            else if (str == TimeUnite.Musical.ToString()) return TimeUnite.Musical;
+            else return TimeUnite.Both;
         }
     }
 
-    internal class SequenceTemplate : XmlBase
+    public class SequenceTemplate : XmlBase
     {
-        internal SequenceTemplate() { }
+        public SequenceTemplate() { }
         internal SequenceTemplate(XElement xElement) : base(xElement) { }
 
-        internal bool LengthEnabled { get; set; } = false;
-        internal bool NoteEnabled { get; set; } = false;
-        internal bool LyricsEnabled { get; set; } = false;
-        internal TimeUnite TimeUnit { get; set; } = TimeUnite.QuarterNote;
-        internal PropertiesList PropertiesList { get; set; } = new PropertiesList();
+        public bool LengthEnabled { get; set; } = false;
+        public bool NoteEnabled { get; set; } = false;
+        public bool LyricsEnabled { get; set; } = false;
+        public TimeUnite TimeUnit { get; set; } = TimeUnite.Both;
+        public PropertiesList PropertiesList { get; set; } = new PropertiesList();
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(GetType().Name,
-                            new XElement(nameof(LengthEnabled), LengthEnabled),
-                            new XElement(nameof(NoteEnabled), NoteEnabled),
-                            new XElement(nameof(LyricsEnabled), LyricsEnabled),
-                            new XElement(nameof(TimeUnit), TimeUnit.ToString()),
-                            PropertiesList.ToXElement());
-            return base.ToXElement();
+            var xElement = base.ToXElement();
+            xElement.Add(new XElement(nameof(LengthEnabled), LengthEnabled),
+                         new XElement(nameof(NoteEnabled), NoteEnabled),
+                         new XElement(nameof(LyricsEnabled), LyricsEnabled),
+                         new XElement(nameof(TimeUnit), TimeUnit.ToString()),
+                         PropertiesList.ToXElement());
+            return xElement;
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            ThisElement = xElement.Element(GetType().Name);
-            LengthEnabled = bool.Parse(ThisElement.Element(nameof(LengthEnabled)).Value);
-            NoteEnabled = bool.Parse(ThisElement.Element(nameof(NoteEnabled)).Value);
-            LyricsEnabled = bool.Parse(ThisElement.Element(nameof(LyricsEnabled)).Value);
-            TimeUnit = Extensions.ParseToTimeUnit(ThisElement.Element(nameof(TimeUnit)).Value);
-            PropertiesList = new PropertiesList(ThisElement);
-            base.LoadFromXElement(ThisElement);
+            var thisElement = base.LoadFromXElement(xElement);
+            LengthEnabled = bool.Parse(thisElement.Element(nameof(LengthEnabled)).Value);
+            NoteEnabled = bool.Parse(thisElement.Element(nameof(NoteEnabled)).Value);
+            LyricsEnabled = bool.Parse(thisElement.Element(nameof(LyricsEnabled)).Value);
+            TimeUnit = Extensions.ParseToTimeUnit(thisElement.Element(nameof(TimeUnit)).Value);
+            PropertiesList = new PropertiesList(thisElement);
+            return thisElement;
         }
     }
 
-    internal class PropertiesList : XmlList<Property>
+    public class PropertiesList : XmlList<Property>
     {
         internal PropertiesList() { }
         internal PropertiesList(XElement xElement) : base(xElement) { }
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(GetType().Name);
             return base.ToXElement();
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            ThisElement = xElement.Element(GetType().Name);
-            base.LoadFromXElement(ThisElement);
+            return base.LoadFromXElement(xElement);
         }
     }
 
-    internal class Property : XmlBase
+    public class Property : XmlBase
     {
         public Property() { }
-        internal Property(string name) 
+        public Property(string name) 
         {
             Name = name;
         }
 
-        internal Property(XElement xElement) : base(xElement) { }
+        public Property(XElement xElement) : base(xElement) { }
 
-        internal string Name { get; set; } = "NoName";
+        public string Name { get; set; } = "NoName";
 
         internal override XElement ToXElement()
         {
-            ThisElement = new XElement(GetType().Name,
-                            new XElement(nameof(Name), Name));
-            return base.ToXElement();
+            var xElement = base.ToXElement();
+            xElement.Add(new XElement(nameof(Name), Name));
+            return xElement;
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            ThisElement = xElement.Element(GetType().Name);
-            Name = ThisElement.Element(nameof(Name)).Value;
-            base.LoadFromXElement(ThisElement);
+            var thisElement = base.LoadFromXElement(xElement);
+            Name = thisElement.Element(nameof(Name)).Value;
+            return thisElement;
         }
     }
 

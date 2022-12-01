@@ -6,26 +6,26 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    internal abstract class XmlInfo: XmlBase
+    public abstract class XmlInfo: XmlBase
     {
-        internal XmlInfo() { Infos = new Dictionary<string, string>(); }
-
-        internal XmlInfo(Dictionary<string, string> infos) { Infos = infos;}
+        internal XmlInfo() { }
 
         internal XmlInfo(XElement xElement) : base(xElement) { }
 
-        internal readonly Dictionary<string, string> Infos;
+        internal readonly Dictionary<string, string> Infos = new Dictionary<string, string>();
         
         internal override XElement ToXElement()
         {
-            ThisElement.Add(Infos.Select(x => new XElement(x.Key, x.Value)));
-            return base.ToXElement();
+            var xElement = base.ToXElement();
+            xElement.Add(Infos.Select(x => new XElement(x.Key, x.Value)));
+            return xElement;
         }
 
-        internal override void LoadFromXElement(XElement xElement)
+        internal override XElement LoadFromXElement(XElement xElement)
         {
-            base.LoadFromXElement(xElement);
-            foreach (var x in xElement.Elements()) { Infos.Add(x.Name.LocalName, x.Value); }
+            var thisElement = base.LoadFromXElement(xElement);
+            foreach (var x in thisElement.Elements()) { Infos.Add(x.Name.LocalName, x.Value); }
+            return thisElement;
         }
     }
 }

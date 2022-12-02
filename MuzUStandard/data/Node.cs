@@ -8,8 +8,8 @@ namespace MuzUStandard.data
         public Node() { }
         internal Node(XElement xElement):base(xElement) { }
 
-        public NoteTimeSpan Time { get; set; }
-        public NoteTimeSpan Length { get; set; }
+        public NoteTimeSpan Time { get; set; } = new NoteTimeSpan();
+        public NoteTimeSpan Length { get; set; } = new NoteTimeSpan(); //TODO() Nuallable
         public int? Note{ get; set; }
         public string Lyrics { get; set; }
 

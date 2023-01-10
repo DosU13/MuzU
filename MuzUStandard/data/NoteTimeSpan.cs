@@ -9,8 +9,12 @@ namespace MuzUStandard.data
     {
         private string XElementName;
 
-        public NoteTimeSpan() { }
-        public NoteTimeSpan(string Name, XElement xElement) : base(xElement) => XElementName = Name;
+        public NoteTimeSpan(string Name) => XElementName = Name;
+        public NoteTimeSpan(string Name, XElement xElement)
+        {
+            XElementName = Name;
+            LoadFromXElement(xElement);
+        }
 
         public long? MicroSeconds { get; set; }
         public long? Length_μs { get; set; }

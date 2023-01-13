@@ -8,8 +8,8 @@ namespace MuzUStandard.data
         public Node() { }
         internal Node(XElement xElement):base(xElement) { }
 
-        public NoteTimeSpan Time { get; set; } = new NoteTimeSpan(nameof(Time));
-        public NoteTimeSpan Length { get; set; }
+        public MusicalTimeSpan Time { get; set; } = new MusicalTimeSpan(nameof(Time));
+        public MusicalTimeSpan Length { get; set; }
         public int? Note{ get; set; }
         public string Lyrics { get; set; }
 
@@ -26,9 +26,9 @@ namespace MuzUStandard.data
         internal override XElement LoadFromXElement(XElement xElement)
         {
             var thisElement = base.LoadFromXElement(xElement);
-            Time = new NoteTimeSpan(nameof(Time), thisElement);
+            Time = new MusicalTimeSpan(nameof(Time), thisElement);
             if(thisElement.Element(nameof(Length))!=null) 
-                Length = new NoteTimeSpan(nameof(Length), thisElement);
+                Length = new MusicalTimeSpan(nameof(Length), thisElement);
             Note = int.TryParse(thisElement.Element(nameof(Note))?.Value, out int _note) ? _note as int? : null;
             Lyrics = thisElement.Element(nameof(Lyrics))?.Value;
             return thisElement;

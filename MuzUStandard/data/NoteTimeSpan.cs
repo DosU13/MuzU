@@ -16,14 +16,12 @@ namespace MuzUStandard.data
             LoadFromXElement(xElement);
         }
 
-        public long? MicroSeconds { get; set; }
         public long? Numerator { get; set; }
         public long? Denominator { get; set; }
 
         internal override XElement ToXElement()
         {
             var xElement = new XElement(XElementName);
-            if (MicroSeconds != null) xElement.Add(new XAttribute(nameof(MicroSeconds), MicroSeconds));
             if (Numerator != null) xElement.Add(new XAttribute(nameof(Numerator), Numerator));
             if (Denominator != null) xElement.Add(new XAttribute(nameof(Denominator), Denominator));
             return xElement;
@@ -32,9 +30,35 @@ namespace MuzUStandard.data
         internal override XElement LoadFromXElement(XElement xElement)
         {
             var thisElement = xElement.Element(XElementName);
-            MicroSeconds = long.TryParse(thisElement.Attribute(nameof(MicroSeconds))?.Value, out long tm) ? tm as long? : null;
             Numerator = long.TryParse(thisElement.Attribute(nameof(Numerator))?.Value, out long tn) ? tn as long? : null;
             Denominator = long.TryParse(thisElement.Attribute(nameof(Denominator))?.Value, out long td) ? td as long? : null;
+            return thisElement;
+        }
+    }
+    public class MetricTimeSpan : XmlBase
+    {
+        private string XElementName;
+
+        public MetricTimeSpan(string Name) => XElementName = Name;
+        public MetricTimeSpan(string Name, XElement xElement)
+        {
+            XElementName = Name;
+            LoadFromXElement(xElement);
+        }
+
+        public long? MicroSeconds { get; set; }
+
+        internal override XElement ToXElement()
+        {
+            var xElement = new XElement(XElementName);
+            if (MicroSeconds != null) xElement.Add(new XAttribute(nameof(MicroSeconds), MicroSeconds));
+            return xElement;
+        }
+
+        internal override XElement LoadFromXElement(XElement xElement)
+        {
+            var thisElement = xElement.Element(XElementName);
+            MicroSeconds = long.TryParse(thisElement.Attribute(nameof(MicroSeconds))?.Value, out long tm) ? tm as long? : null;
             return thisElement;
         }
     }

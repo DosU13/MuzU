@@ -3916,25 +3916,22 @@
   },
   "packageFolders": {
     "C:\\Users\\djeksheev\\.nuget\\packages\\": {},
-    "D:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Doslan\\source\\repos\\MuzU\\MuzUStandard\\MuzUStandard.csproj",
+      "projectUniqueName": "D:\\Doslan\\source\\repos\\MuzU Old Framework\\MuzUStandard\\MuzUStandard.csproj",
       "projectName": "MuzUStandard",
-      "projectPath": "D:\\Doslan\\source\\repos\\MuzU\\MuzUStandard\\MuzUStandard.csproj",
+      "projectPath": "D:\\Doslan\\source\\repos\\MuzU Old Framework\\MuzUStandard\\MuzUStandard.csproj",
       "packagesPath": "C:\\Users\\djeksheev\\.nuget\\packages\\",
-      "outputPath": "D:\\Doslan\\source\\repos\\MuzU\\MuzUStandard\\obj\\",
+      "outputPath": "D:\\Doslan\\source\\repos\\MuzU Old Framework\\MuzUStandard\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\djeksheev\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3943,8 +3940,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "D:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3969,7 +3964,7 @@
             "autoReferenced": true
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

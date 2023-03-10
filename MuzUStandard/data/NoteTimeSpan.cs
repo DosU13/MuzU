@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace MuzUStandard.data
 {
-    public class MusicalTimeSpan : XmlBase
+    internal class MusicalTimeSpan : XmlBase
     {
         private string XElementName;
 
@@ -35,7 +35,7 @@ namespace MuzUStandard.data
             return thisElement;
         }
     }
-    public class MetricTimeSpan : XmlBase
+    internal class MetricTimeSpan : XmlBase
     {
         private string XElementName;
 

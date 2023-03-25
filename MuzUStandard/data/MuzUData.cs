@@ -102,7 +102,10 @@ namespace MuzUStandard.data
         internal MusicLocal(XElement xElement): base(xElement) {}
 
         public string MusicPath { get; set; } = "";
-        public long MusicOffsetMicroseconds { get; set; } = 0; // if positive audio has excess part
+        /// <summary>
+        /// if positive audio has excess part
+        /// </summary>
+        public long MusicOffsetMicroseconds { get; set; } = 0;
         
         internal override XElement ToXElement()
         {

@@ -3915,24 +3915,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\djeksheev\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\dosla\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Doslan\\source\\repos\\MuzU Old Framework\\MuzUStandard\\MuzUStandard.csproj",
+      "projectUniqueName": "D:\\DosU\\DevU\\Visual Studio\\MuzU\\MuzUStandard\\MuzUStandard.csproj",
       "projectName": "MuzUStandard",
-      "projectPath": "E:\\Doslan\\source\\repos\\MuzU Old Framework\\MuzUStandard\\MuzUStandard.csproj",
-      "packagesPath": "C:\\Users\\djeksheev\\.nuget\\packages\\",
-      "outputPath": "E:\\Doslan\\source\\repos\\MuzU Old Framework\\MuzUStandard\\obj\\",
+      "projectPath": "D:\\DosU\\DevU\\Visual Studio\\MuzU\\MuzUStandard\\MuzUStandard.csproj",
+      "packagesPath": "C:\\Users\\dosla\\.nuget\\packages\\",
+      "outputPath": "D:\\DosU\\DevU\\Visual Studio\\MuzU\\MuzUStandard\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\djeksheev\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\dosla\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3964,7 +3959,7 @@
             "autoReferenced": true
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

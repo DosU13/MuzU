@@ -77,11 +77,13 @@ namespace MuzUStandard.data
         public Property(XElement xElement) : base(xElement) { }
 
         public string Name { get; set; } = "NoName";
+        public string Value { get; set; }
 
         internal override XElement ToXElement()
         {
             var xElement = base.ToXElement();
             xElement.Add(new XElement(nameof(Name), Name));
+            xElement.Add(new XElement(nameof(Value), Value));
             return xElement;
         }
 
@@ -89,6 +91,7 @@ namespace MuzUStandard.data
         {
             var thisElement = base.LoadFromXElement(xElement);
             Name = thisElement.Element(nameof(Name)).Value;
+            Value = thisElement.Element(nameof(Value)).Value;
             return thisElement;
         }
     }
